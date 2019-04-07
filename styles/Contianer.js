@@ -3,6 +3,9 @@ import {spacing, filling} from "./settings";
 import {typography} from "./Typography";
 
 export const container = {
+    flex: {
+        flex:1
+    },
     wrapper: {
         marginTop: spacing.section.start,
         flex: 1,
@@ -31,7 +34,8 @@ export const container = {
         ...typography.textNormal,
 
     },
-    footer: {},
+    footer: {
+    },
 };
 
 const Container = StyleSheet.create(container);
