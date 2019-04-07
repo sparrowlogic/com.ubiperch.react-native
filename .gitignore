@@ -7,3 +7,5 @@ npm-debug.*
 *.mobileprovision
 
 \.idea/
+
+env\.js
