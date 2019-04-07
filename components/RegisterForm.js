@@ -3,6 +3,7 @@ import {View, Text, TextInput, Button, FormLabel} from "react-native";
 import {Container, Typography, FieldSet, Buttons} from "../styles";
 import PropTypes from "prop-types";
 import osProp from "../utils/osSpecificProps";
+import StatefulButton from "./StatefulButton";
 
 export default class RegisterForm extends React.Component {
     constructor(props) {
@@ -136,12 +137,13 @@ export default class RegisterForm extends React.Component {
                     </View>
 
                     <View style={FieldSet.wrapper}>
-                        <Button
-                            title={"Create account"}
-                            style={Buttons.default}
-                            onPress={this.handleSubmit}
-                            disabled={!!this.form_is_not_valid()}
 
+                        <StatefulButton
+                            label={"Create Account"}
+                            loadingLabel={"Creating Account..."}
+                            disabled={!!this.form_is_not_valid()}
+                            loading={this.props.loading}
+                            onPress={this.handleSubmit}
                         />
 
                     </View>

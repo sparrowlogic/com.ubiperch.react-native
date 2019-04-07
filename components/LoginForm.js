@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TextInput, Button} from "react-native";
 import {Container, Typography, FieldSet, Buttons} from "../styles";
 import PropTypes from "prop-types";
+import StatefulButton from "./StatefulButton";
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -44,7 +45,7 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <View style={[Container.wrapper, {height: 400}]}>
+            <View style={[Container.wrapper]}>
                 <View style={Container.body}>
 
                     <View style={FieldSet.wrapper}>
@@ -88,11 +89,13 @@ export default class LoginForm extends React.Component {
                     </View>
 
                     <View style={FieldSet.wrapper}>
-                        <Button
-                            title={"Sign In"}
-                            style={Buttons.default}
-                            onPress={this.handleSubmit}
+
+                        <StatefulButton
+                            label={"Sign In"}
+                            loadingLabel={"Signing In..."}
                             disabled={!!this.form_is_not_valid()}
+                            loading={this.props.loading}
+                            onPress={this.handleSubmit}
                         />
 
                     </View>
