@@ -1,41 +1,49 @@
 import React from 'react';
-import {View, Text, TextInput, Button} from "react-native";
-import {Container, Typography, FieldSet, Buttons} from "../styles";
+import {View, Text, Button} from "react-native";
+import {Container} from "../styles";
 import PropTypes from "prop-types";
+import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 
 export default class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: "",
-            password: ""
+            showLoginForm: true
         }
     }
 
+    // Computed
 
-    formIsNotValid() {
-        if (!this.state.email.length) {
-            return "Please type in a valid email.";
-        }
+    register_button_label = () => (
+        this.state.showLoginForm ?
+            "New? Create an account here."
+            :
+            "Already have an account? Login here."
+    );
 
-        if (!this.state.password.length) {
-            return "Please type in your password.";
-        }
+    // Handlers
 
-        return false;
-    }
+    handleLoginSuccess = () => {
 
-    handleSubmit() {
-        this.props.handleSubmit(this.state);
-    }
+    };
 
+    handleRegisterSuccess = () => {
+
+    };
+
+
+    // Presentation
 
     render() {
         return (
             <View style={Container.wrapper}>
+
                 <View style={Container.heading}>
-                    <Text style={[Container.h1, Typography.textCenter]}>
+                    <Text
+                        style={[Container.h1, {textAlign: "center"}]}
+                    >
                         ubiPerch
                     </Text>
                 </View>
@@ -45,50 +53,19 @@ export default class LoginScreen extends React.Component {
                         Welcome to to ubiPerch, a community of people who help
                         each other find stuff to buy. yay.
                     </Text>
-
-                    <View style={FieldSet.wrapper}>
-                        <Text
-                            style={FieldSet.label}
-                        >Email</Text>
-
-                        <TextInput
-                            onChangeText={(text)=> this.setState({email: text})}
-
-                            autoComplete={"email"}
-                            autoCorrect={false}
-                            textContentType={"emailAddress"}
-                            keyboardType={"email-address"}
-
-                            style={FieldSet.input}
-                        />
-                    </View>
-
-                    <View style={FieldSet.wrapper}>
-                        <Text style={FieldSet.label}>
-                            Password
-                        </Text>
-
-                        <TextInput
-                            onChangeText={(text)=> this.setState({password: text})}
-
-                            autoComplete={"password"}
-                            textContentType={"password"}
-                            secureTextEntry={true}
-
-                            style={FieldSet.input}
-                        />
-                    </View>
-
-                    <View style={FieldSet.wrapper}>
-                        <Button
-                            title={"Sign In"}
-                            style={Buttons.default}
-                            onPress={this.handleSubmit}
-                            disabled={!!this.formIsNotValid()}
-                        />
-
-                    </View>
                 </View>
+
+                {this.state.showLoginForm ?
+                    <LoginForm />
+                    :
+                    <RegisterForm/>
+                }
+
+                <Button
+                    title={this.register_button_label()}
+                    onPress={()=>this.setState({showLoginForm: !this.state.showLoginForm})}
+                />
+
 
             </View>
         )
